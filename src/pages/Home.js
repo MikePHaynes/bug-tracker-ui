@@ -5,5 +5,5 @@ export const Home = () => {
         Home Page
       </h1>
     </div>
-  )
-}
+  );
+};
