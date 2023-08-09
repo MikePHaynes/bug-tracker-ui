@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const ProjectsTable = () => {
+export const ProjectTable = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
   const [projects, setProjects] = useState([]);
 
