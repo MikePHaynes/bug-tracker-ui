@@ -1,15 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import Button from 'react-bootstrap/Button';
 
 export const HomePage = () => {
   return (
     <div>
-      <button>
-        <FontAwesomeIcon icon={faEdit} />
+      <button className="bg-white">
+        <FontAwesomeIcon icon={faEdit} className="text-blue-600"/>
       </button>
       <button>
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon color='red' icon={faTrashCan} />
       </button>
+      <Button variant="primary">Click Me!</Button>{' '}
     </div>
   );
 };
