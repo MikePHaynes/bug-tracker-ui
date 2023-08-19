@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
+import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ProjectTable = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
@@ -38,7 +41,7 @@ export const ProjectTable = () => {
 
   return (
     <div>
-      {showProjects && <table className="table-auto">
+      {showProjects && <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>Name</th>
@@ -46,8 +49,7 @@ export const ProjectTable = () => {
             <th>Created At</th>
             <th>View</th>
             <th>Tickets</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -58,19 +60,22 @@ export const ProjectTable = () => {
               <td>{project.createdAt}</td>
               <td><button>View</button></td>
               <td><button onClick={() => fetchProjectTickets(project)}>Tickets</button></td>
-              <td><button>Edit</button></td>
-              <td><button>Delete</button></td>
+              <td>
+                <button><FontAwesomeIcon icon={faEdit}/></button>
+                <button><FontAwesomeIcon icon={faTrashCan}/></button>
+              </td>
             </tr>
           ))}
         </tbody>
-      </table>}
-      {showTickets && <table className="table-auto">
+      </Table>}
+      {showTickets && <Table striped bordered hover variant="dark">
       <thead>
           <tr>
             <th>Name</th>
             <th>Description</th>
             <th>Severity</th>
             <th>Created At</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -80,10 +85,14 @@ export const ProjectTable = () => {
               <td>{ticket.ticketDescription}</td>
               <td>{ticket.severityLevel}</td>
               <td>{ticket.createdAt}</td>
+              <td>
+                <button><FontAwesomeIcon icon={faEdit}/></button>
+                <button><FontAwesomeIcon icon={faTrashCan}/></button>
+              </td>
             </tr>
           ))}
         </tbody>
-        </table>}
+        </Table>}
     </div>
   );
 };
