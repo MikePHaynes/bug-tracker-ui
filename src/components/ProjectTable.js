@@ -92,7 +92,7 @@ export const ProjectTable = () => {
             </tr>
           ))}
         </tbody>
-        </Table>}
+      </Table>}
     </div>
   );
 };
