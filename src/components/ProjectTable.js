@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { EditModal } from './EditModal';
 
 export const ProjectTable = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
@@ -10,6 +11,8 @@ export const ProjectTable = () => {
   const [tickets, setTickets] = useState([]);
   const [showProjects, setShowProjects] = useState(true);
   const [showTickets, setShowTickets] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -39,6 +42,16 @@ export const ProjectTable = () => {
     setShowTickets(true);
   };
 
+  const openEditModal = (projectId) => {
+    setSelectedProjectId(projectId);
+    setEditModalIsOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setSelectedProjectId(null);
+    setEditModalIsOpen(false);
+  };
+
   return (
     <div>
       {showProjects && <Table striped bordered hover variant="dark">
@@ -61,7 +74,7 @@ export const ProjectTable = () => {
               <td><button>View</button></td>
               <td><button onClick={() => fetchProjectTickets(project)}>Tickets</button></td>
               <td>
-                <button><FontAwesomeIcon icon={faEdit}/></button>
+                <button><FontAwesomeIcon icon={faEdit} onClick={() => openEditModal(project.id)}/></button>
                 <button><FontAwesomeIcon icon={faTrashCan}/></button>
               </td>
             </tr>
@@ -93,6 +106,12 @@ export const ProjectTable = () => {
           ))}
         </tbody>
       </Table>}
+
+      <EditModal
+        isOpen={editModalIsOpen}
+        projectId={selectedProjectId}
+        onCancel={closeEditModal}
+      />
     </div>
   );
 };
