@@ -77,7 +77,7 @@ export const ProjectTable = () => {
 
   return (
     <div>
-      {showProjects && <Table striped bordered hover variant="dark">
+      {showProjects && <Table striped bordered hover>
         <thead>
           <tr>
             <th>Name</th>
@@ -104,7 +104,7 @@ export const ProjectTable = () => {
           ))}
         </tbody>
       </Table>}
-      {showTickets && <Table striped bordered hover variant="dark">
+      {showTickets && <Table striped bordered hover>
       <thead>
           <tr>
             <th>Name</th>
