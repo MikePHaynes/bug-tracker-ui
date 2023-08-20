@@ -5,6 +5,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditModal } from './EditModal';
 import { DeleteModal } from './DeleteModal';
+import Button from 'react-bootstrap/Button';
 
 export const ProjectTable = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
@@ -81,10 +82,9 @@ export const ProjectTable = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Description</th>
-            <th>Created At</th>
-            <th>View</th>
+            <th>Details</th>
             <th>Tickets</th>
+            <th>Creation Date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -92,13 +92,12 @@ export const ProjectTable = () => {
           {projects.map(project => (
             <tr key={project.id}>
               <td>{project.projectName}</td>
-              <td>{project.projectDescription}</td>
+              <td><Button variant="link">View Details</Button></td>
+              <td><Button onClick={() => fetchProjectTickets(project)} variant="link">View Tickets</Button></td>
               <td>{project.createdAt}</td>
-              <td><button>View</button></td>
-              <td><button onClick={() => fetchProjectTickets(project)}>Tickets</button></td>
               <td>
-                <button><FontAwesomeIcon icon={faEdit} onClick={() => openEditModal(project.id)}/></button>
-                <button><FontAwesomeIcon icon={faTrashCan} onClick={() => openDeleteModal(project.id)}/></button>
+                <Button><FontAwesomeIcon icon={faEdit} onClick={() => openEditModal(project.id)}/></Button>
+                <Button variant="danger"><FontAwesomeIcon icon={faTrashCan} onClick={() => openDeleteModal(project.id)}/></Button>
               </td>
             </tr>
           ))}
