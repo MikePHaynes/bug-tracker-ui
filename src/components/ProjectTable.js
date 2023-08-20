@@ -4,6 +4,7 @@ import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditModal } from './EditModal';
+import { DeleteModal } from './DeleteModal';
 
 export const ProjectTable = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
@@ -13,6 +14,7 @@ export const ProjectTable = () => {
   const [showTickets, setShowTickets] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -52,6 +54,27 @@ export const ProjectTable = () => {
     setEditModalIsOpen(false);
   };
 
+  const openDeleteModal = (projectId) => {
+    setSelectedProjectId(projectId);
+    setDeleteModalIsOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setSelectedProjectId(null);
+    setDeleteModalIsOpen(false);
+  };
+
+  const deleteProject = async () => {
+    try {
+      await axios.delete(`${API_BASE_URL}/${selectedProjectId}`);
+      setDeleteModalIsOpen(false);
+      setSelectedProjectId(null);
+      fetchProjects();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       {showProjects && <Table striped bordered hover variant="dark">
@@ -75,7 +98,7 @@ export const ProjectTable = () => {
               <td><button onClick={() => fetchProjectTickets(project)}>Tickets</button></td>
               <td>
                 <button><FontAwesomeIcon icon={faEdit} onClick={() => openEditModal(project.id)}/></button>
-                <button><FontAwesomeIcon icon={faTrashCan}/></button>
+                <button><FontAwesomeIcon icon={faTrashCan} onClick={() => openDeleteModal(project.id)}/></button>
               </td>
             </tr>
           ))}
@@ -111,6 +134,13 @@ export const ProjectTable = () => {
         isOpen={editModalIsOpen}
         projectId={selectedProjectId}
         onCancel={closeEditModal}
+      />
+
+      <DeleteModal
+        isOpen={deleteModalIsOpen}
+        projectId={selectedProjectId}
+        onCancel={closeDeleteModal}
+        onConfirm={deleteProject}
       />
     </div>
   );
