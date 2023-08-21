@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import { ProjectTable } from "../components/ProjectTable";
 import { Container, Button, Row, Col } from 'react-bootstrap';
+import { AddProjectModal } from "../components/AddProjectModal";
 import axios from 'axios';
 
 export const ProjectPage = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
+  const [showAddProjectModal, setShowAddProjectModal] = useState(false);
   
   const handleAddProject = () => {
-    
+    setShowAddProjectModal(true);
+  };
+
+  const closeAddProjectModal = () => {
+    setShowAddProjectModal(false);
   };
   
   return (
@@ -21,6 +28,11 @@ export const ProjectPage = () => {
         <hr />
         <ProjectTable />
       </Container>
+
+      <AddProjectModal
+       isOpen={showAddProjectModal}
+       onCancel={closeAddProjectModal}
+      />
     </div>
   );
 };
