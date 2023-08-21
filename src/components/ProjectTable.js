@@ -94,7 +94,7 @@ export const ProjectTable = () => {
               <td>{project.projectName}</td>
               <td><Button variant="link">View Details</Button></td>
               <td><Button onClick={() => fetchProjectTickets(project)} variant="link">View Tickets</Button></td>
-              <td>{project.createdAt}</td>
+              <td>{project.creationDate}</td>
               <td>
                 <Button><FontAwesomeIcon icon={faEdit} onClick={() => openEditModal(project.id)}/></Button>
                 <Button variant="danger"><FontAwesomeIcon icon={faTrashCan} onClick={() => openDeleteModal(project.id)}/></Button>
