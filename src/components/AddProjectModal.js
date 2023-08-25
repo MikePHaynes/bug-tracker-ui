@@ -2,15 +2,20 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AddProjectForm } from './AddProjectForm';
 
-export const AddProjectModal = ({ isOpen, onCancel }) => {
+export const AddProjectModal = ({ isOpen, onAdd, onCancel }) => {
+
   return (
     <Modal show={isOpen} onHide={onCancel}>
       <Modal.Header closeButton>
         <Modal.Title>Add Project</Modal.Title>
       </Modal.Header>
-      <Modal.Body><AddProjectForm /></Modal.Body>
+      <Modal.Body>
+        <AddProjectForm
+          onSubmit={onAdd} 
+        />
+      </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary">
+        <Button variant="primary" onClick={onAdd}>
           Add
         </Button>
         <Button variant="danger" onClick={onCancel}>

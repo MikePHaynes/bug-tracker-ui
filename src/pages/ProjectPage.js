@@ -8,8 +8,10 @@ export const ProjectPage = () => {
   const API_BASE_URL = 'http://localhost:8080/api/projects';
   const [showAddProjectModal, setShowAddProjectModal] = useState(false);
   
-  const handleAddProject = () => {
+  const handleAddProject = async (project) => {
     setShowAddProjectModal(true);
+    await axios.post(API_BASE_URL, project);
+    setShowAddProjectModal(false);
   };
 
   const closeAddProjectModal = () => {
