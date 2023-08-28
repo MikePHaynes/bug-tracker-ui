@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { EditModal } from './EditModal';
+import { EditProjectModal } from './EditProjectModal';
 import { DeleteModal } from './DeleteModal';
 import Button from 'react-bootstrap/Button';
 
@@ -129,7 +129,7 @@ export const ProjectTable = () => {
         </tbody>
       </Table>}
 
-      <EditModal
+      <EditProjectModal
         isOpen={editModalIsOpen}
         projectId={selectedProjectId}
         onCancel={closeEditModal}
