@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NavigationBar } from './components/NavigationBar';
 import { HomePage } from './pages/HomePage';
-import { ProjectPage } from './pages/ProjectPage';
+import { ProjectsPage } from './pages/ProjectsPage';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
         </Routes>
       </Router>
     </div>

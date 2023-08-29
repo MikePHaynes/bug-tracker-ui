@@ -7,7 +7,7 @@ import { EditProjectModal } from './EditProjectModal';
 import { DeleteModal } from './DeleteModal';
 import Button from 'react-bootstrap/Button';
 
-export const ProjectTable = ({ projects, api, fetchProjects }) => {
+export const ProjectsTable = ({ projects, api, fetchProjects }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);

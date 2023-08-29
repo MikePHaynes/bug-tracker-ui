@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ProjectTable } from "../components/ProjectTable";
+import { ProjectsTable } from "../components/ProjectsTable";
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { AddProjectModal } from "../components/AddProjectModal";
 import axios from 'axios';
 
-export const ProjectPage = () => {
+export const ProjectsPage = () => {
   const PROJECTS_API_BASE_URL = 'http://localhost:8080/api/projects';
   const [showAddProjectModal, setShowAddProjectModal] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -42,7 +42,7 @@ export const ProjectPage = () => {
           </Col>
         </Row>
         <hr />
-        <ProjectTable  
+        <ProjectsTable  
           projects={projects}
           api={PROJECTS_API_BASE_URL}
           fetchProjects={fetchProjects} 
