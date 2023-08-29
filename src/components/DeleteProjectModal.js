@@ -2,6 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export const DeleteProjectModal = ({ project, onClose, onDelete }) => {
+  const handleDelete = () => {
+    onDelete();
+    onClose();
+  };
+  
   return (
     <Modal show={true} onHide={onClose}>
       <Modal.Header closeButton>
@@ -12,7 +17,7 @@ export const DeleteProjectModal = ({ project, onClose, onDelete }) => {
         <Button variant="primary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="danger" onClick={onDelete}>
+        <Button variant="danger" onClick={handleDelete}>
           Delete
         </Button>
       </Modal.Footer>

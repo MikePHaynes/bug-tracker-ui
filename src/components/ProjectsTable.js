@@ -36,7 +36,6 @@ export const ProjectsTable = ({ projects, api, fetchProjects }) => {
     try {
       await axios.put(`${api}/${updatedProject.id}`, updatedProject);
       fetchProjects();
-      handleEditModalClose();
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +45,6 @@ export const ProjectsTable = ({ projects, api, fetchProjects }) => {
     try {
       await axios.delete(`${api}/${selectedProject.id}`);
       fetchProjects();
-      handleDeleteModalClose();
     } catch (error) {
       console.error(error);
     }
