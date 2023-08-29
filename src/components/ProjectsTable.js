@@ -4,7 +4,7 @@ import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditProjectModal } from './EditProjectModal';
-import { DeleteModal } from './DeleteModal';
+import { DeleteProjectModal } from './DeleteProjectModal';
 import Button from 'react-bootstrap/Button';
 
 export const ProjectsTable = ({ projects, api, fetchProjects }) => {
@@ -89,7 +89,7 @@ export const ProjectsTable = ({ projects, api, fetchProjects }) => {
       )}
 
       {showDeleteModal && (
-        <DeleteModal
+        <DeleteProjectModal
           project={selectedProject}
           onClose={handleDeleteModalClose}
           onDelete={handleDeleteProject}

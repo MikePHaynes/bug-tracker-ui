@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export const DeleteModal = ({ project, onClose, onDelete }) => {
+export const DeleteProjectModal = ({ project, onClose, onDelete }) => {
   return (
     <Modal show={true} onHide={onClose}>
       <Modal.Header closeButton>
