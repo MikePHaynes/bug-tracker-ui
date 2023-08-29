@@ -47,7 +47,7 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={onClose}>
+        <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
         <Button variant="primary" onClick={handleSave}>

@@ -14,7 +14,7 @@ export const DeleteProjectModal = ({ project, onClose, onDelete }) => {
       </Modal.Header>
       <Modal.Body>{project.projectDescription}</Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onClose}>
+        <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
         <Button variant="danger" onClick={handleDelete}>

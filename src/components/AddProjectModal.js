@@ -63,11 +63,11 @@ export const AddProjectModal = ({ onClose, onAdd }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
+        <Button variant="secondary" onClick={onClose}>
+          Cancel
+        </Button>
         <Button variant="primary" onClick={handleAdd}>
           Add
-        </Button>
-        <Button variant="danger" onClick={onClose}>
-          Cancel
         </Button>
       </Modal.Footer>
     </Modal>
