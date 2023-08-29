@@ -70,7 +70,7 @@ export const ProjectsTable = ({ projects, api, fetchProjects }) => {
               <td><Button variant="link">View Tickets</Button></td>
               <td>{project.creationDate}</td>
               <td>
-                <Button><FontAwesomeIcon icon={faEdit} onClick={() => handleEditModalOpen(project)}/></Button>
+                <Button variant="primary" className="me-1"><FontAwesomeIcon icon={faEdit} onClick={() => handleEditModalOpen(project)}/></Button>
                 <Button variant="danger"><FontAwesomeIcon icon={faTrashCan} onClick={() => handleDeleteModalOpen(project)}/></Button>
               </td>
             </tr>

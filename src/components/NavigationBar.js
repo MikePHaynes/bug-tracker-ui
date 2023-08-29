@@ -8,7 +8,7 @@ export const NavigationBar = () => {
     <div>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="/home">BugTracker</Navbar.Brand>
+          <Navbar.Brand href="/">BugTracker</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/projects">Projects</Nav.Link>
             <Nav.Link href="/tickets">Tickets</Nav.Link>
