@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 export const NavigationBar = () => {
   return (
     <div>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar>
         <Container>
           <Navbar.Brand href="/">BugTracker</Navbar.Brand>
           <Nav className="me-auto">
