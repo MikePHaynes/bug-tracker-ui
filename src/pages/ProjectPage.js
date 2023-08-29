@@ -1,16 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProjectTable } from "../components/ProjectTable";
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import { AddProjectModal } from "../components/AddProjectModal";
 import axios from 'axios';
 
 export const ProjectPage = () => {
-  const API_BASE_URL = 'http://localhost:8080/api/projects';
+  const PROJECTS_API_BASE_URL = 'http://localhost:8080/api/projects';
   const [showAddProjectModal, setShowAddProjectModal] = useState(false);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(PROJECTS_API_BASE_URL);
+      setProjects(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
   const handleAddProject = async (project) => {
     setShowAddProjectModal(true);
-    await axios.post(API_BASE_URL, project);
+    await axios.post(PROJECTS_API_BASE_URL, project);
     setShowAddProjectModal(false);
   };
 
@@ -28,12 +42,16 @@ export const ProjectPage = () => {
           </Col>
         </Row>
         <hr />
-        <ProjectTable />
+        <ProjectTable  
+          projects={projects}
+          api={PROJECTS_API_BASE_URL}
+          fetchProjects={fetchProjects} 
+        />
       </Container>
 
       <AddProjectModal
-       isOpen={showAddProjectModal}
-       onCancel={closeAddProjectModal}
+        isOpen={showAddProjectModal}
+        onCancel={closeAddProjectModal}
       />
     </div>
   );
