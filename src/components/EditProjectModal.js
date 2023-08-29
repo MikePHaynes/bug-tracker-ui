@@ -1,20 +1,28 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 export const EditProjectModal = ({ project, onClose, onSave }) => {
-  const [updatedProject, setUpdatedProject] = useState(project);
+  const schema = yup.object().shape({
+    projectName: yup.string().required('Project name is required'),
+    projectDescription: yup.string().required('Project description is required'),
+  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedProject((prevProject) => ({
-      ...prevProject,
-      [name]: value,
-    }));
-  };
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      id: project.id,
+      projectName: project.projectName,
+      projectDescription: project.projectDescription,
+      tickets: project.tickets,
+      creationDate: project.creationDate,
+    },
+  });
 
-  const handleSave = () => {
+  const onSubmit = (updatedProject) => {
     onSave(updatedProject);
     onClose();
   };
@@ -25,23 +33,21 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
         <Modal.Title>Edit Project</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group>
             <Form.Label>Project Name</Form.Label>
             <Form.Control
               type="text"
-              name="projectName"
-              value={updatedProject.projectName}
-              onChange={handleChange} 
+              placeholder="Project name"
+              {...register('projectName')} 
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>Project Description</Form.Label>
             <Form.Control
-              type="text"
-              name="projectDescription"
-              value={updatedProject.projectDescription}
-              onChange={handleChange} 
+              as="textarea"
+              placeholder="Project description"
+              {...register('projectDescription')} 
             />
           </Form.Group>
         </Form>
@@ -50,7 +56,7 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleSave}>
+        <Button variant="primary" type="submit" onClick={handleSubmit(onSubmit)}>
           Save
         </Button>
       </Modal.Footer>
