@@ -38,7 +38,6 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
             <Form.Label>Project Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Project name"
               {...register('projectName')} 
             />
           </Form.Group>
@@ -46,7 +45,6 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
             <Form.Label>Project Description</Form.Label>
             <Form.Control
               as="textarea"
-              placeholder="Project description"
               {...register('projectDescription')} 
             />
           </Form.Group>
