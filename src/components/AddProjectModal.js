@@ -1,25 +1,23 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 export const AddProjectModal = ({ onClose, onAdd }) => {
-  const [newProject, setNewProject] = useState({
-    projectName: '',
-    projectDescription: '',
+  const schema = yup.object().shape({
+    projectName: yup.string().required('Project name is required'),
+    projectDescription: yup.string().required('Project description is required'),
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewProject((prevProject) => ({
-      ...prevProject,
-      [name]: value,
-    }));
-  };
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleAdd = () => {
-    onAdd(newProject);
+  const onSubmit = (project) => {
+    onAdd(project);
     onClose();
   };
 
@@ -29,7 +27,7 @@ export const AddProjectModal = ({ onClose, onAdd }) => {
         <Modal.Title>Add Project</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group>
             <FloatingLabel
               controlId="floatingInput"
@@ -38,11 +36,8 @@ export const AddProjectModal = ({ onClose, onAdd }) => {
             >
               <Form.Control 
                 type="text"
-                name="projectName"
-                value={newProject.projectName}
-                onChange={handleChange} 
                 placeholder="Project name"
-                required 
+                {...register('projectName')}
               />
             </FloatingLabel>
             <FloatingLabel
@@ -51,12 +46,8 @@ export const AddProjectModal = ({ onClose, onAdd }) => {
             >
               <Form.Control
                 as="textarea"
-                name="projectDescription"
-                value={newProject.projectDescription}
-                onChange={handleChange}
                 placeholder="Project description"
-                style={{ height: '100px' }}
-                required 
+                {...register('projectDescription')} 
               />
             </FloatingLabel>
           </Form.Group>
@@ -66,7 +57,7 @@ export const AddProjectModal = ({ onClose, onAdd }) => {
         <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleAdd}>
+        <Button variant="primary" type="submit" onClick={handleSubmit(onSubmit)}>
           Add
         </Button>
       </Modal.Footer>
