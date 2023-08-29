@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export const ProjectsPage = () => {
   const PROJECTS_API_BASE_URL = 'http://localhost:8080/api/projects';
-  const [showAddProjectModal, setShowAddProjectModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -21,24 +21,31 @@ export const ProjectsPage = () => {
       console.error(error);
     }
   };
-  
-  const handleAddProject = async (project) => {
-    setShowAddProjectModal(true);
-    await axios.post(PROJECTS_API_BASE_URL, project);
-    setShowAddProjectModal(false);
+
+  const handleAddModalOpen = () => {
+    setShowAddModal(true);
   };
 
-  const closeAddProjectModal = () => {
-    setShowAddProjectModal(false);
+  const handleAddModalClose = () => {
+    setShowAddModal(false);
   };
   
+  const handleAddProject = async (project) => {
+    try {
+      await axios.post(PROJECTS_API_BASE_URL, project);
+      fetchProjects();
+    } catch(error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <Container className="mt-3">
         <Row>
           <Col xs={6}><h2>Projects</h2></Col>
           <Col xs={6} className="text-right">
-            <Button variant="primary" onClick={handleAddProject}>Add Project</Button>
+            <Button variant="primary" onClick={handleAddModalOpen}>Add Project</Button>
           </Col>
         </Row>
         <hr />
@@ -49,10 +56,12 @@ export const ProjectsPage = () => {
         />
       </Container>
 
-      <AddProjectModal
-        isOpen={showAddProjectModal}
-        onCancel={closeAddProjectModal}
-      />
+      {showAddModal && (
+        <AddProjectModal
+          onClose={handleAddModalClose}
+          onAdd={handleAddProject}
+        />
+      )}
     </div>
   );
 };

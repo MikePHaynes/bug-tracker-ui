@@ -51,7 +51,7 @@ export const EditProjectModal = ({ project, onClose, onSave }) => {
           Close
         </Button>
         <Button variant="primary" onClick={handleSave}>
-          Save Changes
+          Save
         </Button>
       </Modal.Footer>
     </Modal>
